@@ -1,0 +1,215 @@
+api_client: base_uri: http://localhost:5011/api/2.0/preview/mlflow
+====== get_experiments
+api_client.GET: url: http://localhost:5011/api/2.0/preview/mlflow/experiments/list
+api_client.GET: rsp: {
+  "experiments": [
+    {
+      "experiment_id": "0",
+      "name": "Default",
+      "artifact_location": "/home/andre/work/mlflow/test/mlruns/0"
+    },
+    {
+      "experiment_id": "1",
+      "name": "py_exp_153452886358",
+      "artifact_location": "/home/andre/work/mlflow/test/mlruns/1"
+    },
+    {
+      "experiment_id": "2",
+      "name": "py_exp_15345288999",
+      "artifact_location": "/home/andre/work/mlflow/test/mlruns/2"
+    },
+    {
+      "experiment_id": "3",
+      "name": "py_exp_153452892433",
+      "artifact_location": "/home/andre/work/mlflow/test/mlruns/3"
+    },
+    {
+      "experiment_id": "4",
+      "name": "py_exp_153452898592",
+      "artifact_location": "/home/andre/work/mlflow/test/mlruns/4"
+    },
+    {
+      "experiment_id": "5",
+      "name": "py_exp_153452933461",
+      "artifact_location": "/home/andre/work/mlflow/test/mlruns/5"
+    },
+    {
+      "experiment_id": "6",
+      "name": "py_exp_153452934567",
+      "artifact_location": "/home/andre/work/mlflow/test/mlruns/6"
+    },
+    {
+      "experiment_id": "7",
+      "name": "py_exp_153452936159",
+      "artifact_location": "/home/andre/work/mlflow/test/mlruns/7"
+    },
+    {
+      "experiment_id": "8",
+      "name": "py_exp_153452947743",
+      "artifact_location": "/home/andre/work/mlflow/test/mlruns/8"
+    },
+    {
+      "experiment_id": "9",
+      "name": "py_exp_153452949257",
+      "artifact_location": "/home/andre/work/mlflow/test/mlruns/9"
+    }
+  ]
+}
+Experiments.type: <type 'list'>
+#Experiments: 10
+  {u'artifact_location': u'/home/andre/work/mlflow/test/mlruns/0', u'name': u'Default', u'experiment_id': u'0'}
+  {u'artifact_location': u'/home/andre/work/mlflow/test/mlruns/1', u'name': u'py_exp_153452886358', u'experiment_id': u'1'}
+  {u'artifact_location': u'/home/andre/work/mlflow/test/mlruns/2', u'name': u'py_exp_15345288999', u'experiment_id': u'2'}
+  {u'artifact_location': u'/home/andre/work/mlflow/test/mlruns/3', u'name': u'py_exp_153452892433', u'experiment_id': u'3'}
+  {u'artifact_location': u'/home/andre/work/mlflow/test/mlruns/4', u'name': u'py_exp_153452898592', u'experiment_id': u'4'}
+  {u'artifact_location': u'/home/andre/work/mlflow/test/mlruns/5', u'name': u'py_exp_153452933461', u'experiment_id': u'5'}
+  {u'artifact_location': u'/home/andre/work/mlflow/test/mlruns/6', u'name': u'py_exp_153452934567', u'experiment_id': u'6'}
+  {u'artifact_location': u'/home/andre/work/mlflow/test/mlruns/7', u'name': u'py_exp_153452936159', u'experiment_id': u'7'}
+  {u'artifact_location': u'/home/andre/work/mlflow/test/mlruns/8', u'name': u'py_exp_153452947743', u'experiment_id': u'8'}
+  {u'artifact_location': u'/home/andre/work/mlflow/test/mlruns/9', u'name': u'py_exp_153452949257', u'experiment_id': u'9'}
+====== CreateExperiment
+CreateExperiment: req: experiment_name: py_exp_153453025715
+api_client.POST: req: {"name": "py_exp_153453025715"}
+api_client.POST: url: http://localhost:5011/api/2.0/preview/mlflow/experiments/create
+api_client.POST: rsp: {
+  "experiment_id": "10"
+}
+CreateExperiment: rsp: experiment_id: 10
+====== CreateRun
+api_client.POST: req: {"source_type": "LOCAL", "start_time": 1534530257, "source_name": "sample.py", "experiment_id": "10", "run_name": "run_for_exp_py_exp_153453025715"}
+api_client.POST: url: http://localhost:5011/api/2.0/preview/mlflow/runs/create
+api_client.POST: rsp: {
+  "run": {
+    "info": {
+      "run_uuid": "1b3aa6904fa042d3854fb77f38fce92f",
+      "experiment_id": "10",
+      "name": "Run 0",
+      "source_type": "LOCAL",
+      "source_name": "sample.py",
+      "user_id": "",
+      "status": "RUNNING",
+      "start_time": "1534530257",
+      "artifact_uri": "/home/andre/work/mlflow/test/mlruns/10/1b3aa6904fa042d3854fb77f38fce92f/artifacts"
+    }
+  }
+}
+CreateRun: rsp: {u'status': u'RUNNING', u'source_name': u'sample.py', u'name': u'Run 0', u'artifact_uri': u'/home/andre/work/mlflow/test/mlruns/10/1b3aa6904fa042d3854fb77f38fce92f/artifacts', u'start_time': u'1534530257', u'source_type': u'LOCAL', u'run_uuid': u'1b3aa6904fa042d3854fb77f38fce92f', u'experiment_id': u'10', u'user_id': u''}
+====== Log
+api_client.POST: req: {"run_uuid": "1b3aa6904fa042d3854fb77f38fce92f", "value": "2", "key": "max_depth"}
+api_client.POST: url: http://localhost:5011/api/2.0/preview/mlflow/runs/log-parameter
+api_client.POST: rsp: {}
+api_client.POST: req: {"timestamp": 1534530257, "run_uuid": "1b3aa6904fa042d3854fb77f38fce92f", "value": 0.99, "key": "auc"}
+api_client.POST: url: http://localhost:5011/api/2.0/preview/mlflow/runs/log-metric
+api_client.POST: rsp: {}
+====== Update Run
+api_client.POST: req: {"status": "FINISHED", "run_uuid": "1b3aa6904fa042d3854fb77f38fce92f", "end_time": 1534531257}
+api_client.POST: url: http://localhost:5011/api/2.0/preview/mlflow/runs/update
+api_client.POST: rsp: {
+  "run_info": {
+    "run_uuid": "1b3aa6904fa042d3854fb77f38fce92f",
+    "experiment_id": "10",
+    "name": "Run 0",
+    "source_type": "LOCAL",
+    "source_name": "sample.py",
+    "user_id": "",
+    "status": "FINISHED",
+    "start_time": "1534530257",
+    "end_time": "1534531257",
+    "artifact_uri": "/home/andre/work/mlflow/test/mlruns/10/1b3aa6904fa042d3854fb77f38fce92f/artifacts"
+  }
+}
+====== GetRun
+api_client.GET: url: http://localhost:5011/api/2.0/preview/mlflow/runs/get?run_uuid=1b3aa6904fa042d3854fb77f38fce92f
+api_client.GET: rsp: {
+  "run": {
+    "info": {
+      "run_uuid": "1b3aa6904fa042d3854fb77f38fce92f",
+      "experiment_id": "10",
+      "name": "Run 0",
+      "source_type": "LOCAL",
+      "source_name": "sample.py",
+      "user_id": "",
+      "status": "FINISHED",
+      "start_time": "1534530257",
+      "end_time": "1534531257",
+      "artifact_uri": "/home/andre/work/mlflow/test/mlruns/10/1b3aa6904fa042d3854fb77f38fce92f/artifacts"
+    },
+    "data": {
+      "metrics": [
+        {
+          "key": "auc",
+          "value": 0.9900000095367432,
+          "timestamp": "1534530257"
+        }
+      ],
+      "params": [
+        {
+          "key": "max_depth",
+          "value": "2"
+        }
+      ]
+    }
+  }
+}
+GetRun: {u'run': {u'info': {u'status': u'FINISHED', u'source_name': u'sample.py', u'name': u'Run 0', u'artifact_uri': u'/home/andre/work/mlflow/test/mlruns/10/1b3aa6904fa042d3854fb77f38fce92f/artifacts', u'start_time': u'1534530257', u'source_type': u'LOCAL', u'run_uuid': u'1b3aa6904fa042d3854fb77f38fce92f', u'end_time': u'1534531257', u'experiment_id': u'10', u'user_id': u''}, u'data': {u'metrics': [{u'timestamp': u'1534530257', u'value': 0.9900000095367432, u'key': u'auc'}], u'params': [{u'value': u'2', u'key': u'max_depth'}]}}}
+====== get_experiment
+api_client.GET: url: http://localhost:5011/api/2.0/preview/mlflow/experiments/get?experiment_id=10
+api_client.GET: rsp: {
+  "experiment": {
+    "experiment_id": "10",
+    "name": "py_exp_153453025715",
+    "artifact_location": "/home/andre/work/mlflow/test/mlruns/10"
+  },
+  "runs": [
+    {
+      "run_uuid": "1b3aa6904fa042d3854fb77f38fce92f",
+      "experiment_id": "10",
+      "name": "Run 0",
+      "source_type": "LOCAL",
+      "source_name": "sample.py",
+      "user_id": "",
+      "status": "FINISHED",
+      "start_time": "1534530257",
+      "end_time": "1534531257",
+      "artifact_uri": "/home/andre/work/mlflow/test/mlruns/10/1b3aa6904fa042d3854fb77f38fce92f/artifacts"
+    }
+  ]
+}
+Experiment: {u'runs': [{u'status': u'FINISHED', u'source_name': u'sample.py', u'name': u'Run 0', u'artifact_uri': u'/home/andre/work/mlflow/test/mlruns/10/1b3aa6904fa042d3854fb77f38fce92f/artifacts', u'start_time': u'1534530257', u'source_type': u'LOCAL', u'run_uuid': u'1b3aa6904fa042d3854fb77f38fce92f', u'end_time': u'1534531257', u'experiment_id': u'10', u'user_id': u''}], u'experiment': {u'artifact_location': u'/home/andre/work/mlflow/test/mlruns/10', u'name': u'py_exp_153453025715', u'experiment_id': u'10'}}
+====== Search
+api_client.POST: req: {"anded_expressions": [{"parameter": {"string": {"value": "2", "comparator": "="}, "key": "max_depth"}}, {"metric": {"float": {"value": 0.99, "comparator": ">="}, "key": "auc"}}], "experiment_ids": ["10"]}
+api_client.POST: url: http://localhost:5011/api/2.0/preview/mlflow/runs/search
+api_client.POST: rsp: {
+  "runs": [
+    {
+      "info": {
+        "run_uuid": "1b3aa6904fa042d3854fb77f38fce92f",
+        "experiment_id": "10",
+        "name": "Run 0",
+        "source_type": "LOCAL",
+        "source_name": "sample.py",
+        "user_id": "",
+        "status": "FINISHED",
+        "start_time": "1534530257",
+        "end_time": "1534531257",
+        "artifact_uri": "/home/andre/work/mlflow/test/mlruns/10/1b3aa6904fa042d3854fb77f38fce92f/artifacts"
+      },
+      "data": {
+        "metrics": [
+          {
+            "key": "auc",
+            "value": 0.9900000095367432,
+            "timestamp": "1534530257"
+          }
+        ],
+        "params": [
+          {
+            "key": "max_depth",
+            "value": "2"
+          }
+        ]
+      }
+    }
+  ]
+}
+SearchResult: {u'runs': [{u'info': {u'status': u'FINISHED', u'source_name': u'sample.py', u'name': u'Run 0', u'artifact_uri': u'/home/andre/work/mlflow/test/mlruns/10/1b3aa6904fa042d3854fb77f38fce92f/artifacts', u'start_time': u'1534530257', u'source_type': u'LOCAL', u'run_uuid': u'1b3aa6904fa042d3854fb77f38fce92f', u'end_time': u'1534531257', u'experiment_id': u'10', u'user_id': u''}, u'data': {u'metrics': [{u'timestamp': u'1534530257', u'value': 0.9900000095367432, u'key': u'auc'}], u'params': [{u'value': u'2', u'key': u'max_depth'}]}}]}
