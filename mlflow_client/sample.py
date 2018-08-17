@@ -7,8 +7,8 @@ def now():
     return long(time.time())
 
 def process(client):
-    print("====== get_experiments")
-    exps = client.get_experiments()
+    print("====== list_experiments")
+    exps = client.list_experiments()
     print("Experiments.type:",type(exps))
     print("#Experiments:",len(exps))
     for exp in exps:
