@@ -85,7 +85,7 @@ class MLflowApiClient(object):
 
     def _get(self, path):
         """ Executes an HTTP GET call
-        :param path: Relative path name of path such as jobs/get?job_id=1776.
+        :param path: Relative path name such as runs/get.
         """
         url = self._mk_url(path)
         if self.verbose: print("api_client.GET: url:",url)
@@ -100,13 +100,13 @@ class MLflowApiClient(object):
         if self.verbose: print("api_client.POST: rsp:",rsp)
         return json.loads(str(rsp))
 
-    def _post(self, resource, data):
+    def _post(self, path, data):
         """
         Executes an HTTP POST call
-        :param resource: Relative path name of resource such as jobs/runs/submit.
+        :param path: Relative path name such as runs/get.
         :param data: JSON request payload.
         """
-        url = self._mk_url(resource)
+        url = self._mk_url(path)
         if self.verbose: print("api_client.POST: url:",url)
         rsp = requests.post(url, data)
         self._check_response(rsp)
