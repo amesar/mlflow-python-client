@@ -1,7 +1,7 @@
 from __future__ import print_function
 
 import os, sys, time
-from api_client import ApiClient
+from mlflow_api_client import MLflowApiClient
 
 def now():
     return long(time.time())
@@ -58,5 +58,5 @@ if __name__ == "__main__":
     if len(sys.argv) < 2:
         sys.stderr.write("ERROR: Expecting BASE_URL")
         sys.exit(1)
-    client = ApiClient(sys.argv[1])
+    client = MLflowApiClient(sys.argv[1])
     process(client)
