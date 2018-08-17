@@ -2,7 +2,7 @@
 
 Python client for [MLflow](https://mlflow.org) REST API.
 
-See [api_client.py](mlflow_client/api_client.py).
+See [mlflow_api_client.py](mlflow_client/mlflow_api_client.py)
 
 ## Build
 Basic
