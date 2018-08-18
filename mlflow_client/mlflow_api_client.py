@@ -147,4 +147,4 @@ class MLflowApiClient(object):
             raise Exception("HTTP status code: " + str(rsp.status_code)+" Reason: "+rsp.reason)
 
     def _now(self):
-        return long(time.time())
+        return int(time.time())

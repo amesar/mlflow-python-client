@@ -4,7 +4,7 @@ import os, sys, time
 from mlflow_api_client import MLflowApiClient
 
 def now():
-    return long(time.time())
+    return int(time.time())
 
 def process(client):
     print("====== list_experiments")
