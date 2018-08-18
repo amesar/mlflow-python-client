@@ -1,6 +1,6 @@
 # MLflow Python Client
 
-A slightly opiniated Python client for [MLflow](https://mlflow.org) REST API that implements all REST operations.
+A slightly opinionated Python client for [MLflow](https://mlflow.org) REST API that implements all REST operations.
 
 See [mlflow_api_client.py](mlflow_client/mlflow_api_client.py) for client implementation.
 
@@ -50,7 +50,7 @@ search2: {u'runs': [{u'info': {u'status': u'FINISHED', u'source_name': u'sample.
 
 # Opinions
 
-The opinons that this MLflow Python Client holds are:
+The opinions that this MLflow Python Client holds are:
 * Unroll responses - when there is only one JSON leaf node in the response, move it up to the root
 * Simplify the search request payload as in the search2() method
 
