@@ -16,11 +16,19 @@ class MLflowApiClient(object):
         return self.get('experiments/list')['experiments']
 
     def get_experiment(self, experiment_id):
+        """
+        :param experiment_id: experiment ID search over
+        """
         return self.get('experiments/get?experiment_id='+experiment_id)
 
     def create_experiment(self, experiment_name):
+        """
+        :param experiment_name: experiment name
+        :returns: experiment ID 
+        :rtype: str
+        """
         dct = {'name': experiment_name}
-        return self.post('experiments/create',dct)
+        return self.post('experiments/create',dct)['experiment_id']
 
     def get_run(self, run_uuid):
         return self.get('runs/get?run_uuid='+run_uuid)
@@ -48,21 +56,21 @@ class MLflowApiClient(object):
     def list_artifacts(self, run_uuid, path):
         return self.get('artifacts/list?run_uuid={}&path={}'.format(run_uuid,path))
 
+    def get_artifact(self, run_uuid, path):
+        return self.get('artifacts/get?run_uuid={}&path={}'.format(run_uuid,path))
+
     def search(self, dct):
         return self.post('runs/search',dct)
 
     def search2(self, experiment_ids, clauses):
         """
         :param experiment_ids: List of experiment IDs to search over
-        :param: List of simplified clauses 
-            Example:
-                [
-                  { "type": "parameter", "comparator": "=", "key": "max_depth", "value": "3" },
-                  { "type": "metric", "comparator": ">=", "key": "auc", "value": 2 } 
-                ] 
+        :param clauses: List of simplified clauses 
+            Example: [
+                { "type": "parameter", "comparator": "=", "key": "max_depth", "value": "3" },
+                { "type": "metric", "comparator": ">=", "key": "auc", "value": 2 } 
+             ] 
         """
-        dct = {}
-        dct['experiment_ids'] = experiment_ids
         anded_expressions = []
         for cl in clauses: 
             ctype = cl['type']
@@ -72,8 +80,7 @@ class MLflowApiClient(object):
                 anded_expressions.append({'metric': { 'key': cl['key'], 'float': { 'comparator': cl['comparator'], 'value': cl['value'] }}})
             else:
                 raise Exception("Illegal clause type '{}' in search".format(ctype))
-        dct['anded_expressions'] = anded_expressions
-        return self.search(dct)
+        return self.search({ 'experiment_ids':  experiment_ids, 'anded_expressions': anded_expressions })
 
     def _mk_url(self, path):
         return self.base_uri + '/' + path

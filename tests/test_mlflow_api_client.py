@@ -17,8 +17,7 @@ class ApiTest(unittest.TestCase):
 
     def test_create_experiment(self):
         experiment_name = create_exp_name()
-        rsp = client.create_experiment(experiment_name)
-        experiment_id = rsp['experiment_id']
+        experiment_id = client.create_experiment(experiment_name)
 
         rsp = client.get_experiment(experiment_id)
         print("Experiment:",rsp)
