@@ -82,6 +82,22 @@ class MLflowApiClient(object):
                 raise Exception("Illegal clause type '{}' in search".format(ctype))
         return self.search({ 'experiment_ids':  experiment_ids, 'anded_expressions': anded_expressions })
 
+
+    def get_experiment_id(self, experiment_name):
+        exps = self.list_experiments()
+        for exp in exps:
+            if experiment_name == exp['name']:
+                return exp['experiment_id']
+        return None
+
+    def get_or_create_experiment_id(self, experiment_name):
+        experiment_id = self.get_experiment_id(experiment_name)
+        if experiment_id is None:
+            experiment_id = self.create_experiment(experiment_name)
+        #print("experiment_name={} experiment_id={}".format(experiment_name,experiment_id))
+        return experiment_id
+
+
     def _mk_url(self, path):
         return self.base_uri + '/' + path
 
