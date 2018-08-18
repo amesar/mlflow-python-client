@@ -57,7 +57,7 @@ class MLflowApiClient(object):
         return self.get('artifacts/list?run_uuid={}&path={}'.format(run_uuid,path))
 
     def get_artifact(self, run_uuid, path):
-        return self.get('artifacts/get?run_uuid={}&path={}'.format(run_uuid,path))
+        return self.get_as_bytes('artifacts/get?run_uuid={}&path={}'.format(run_uuid,path))
 
     def search(self, dct):
         return self.post('runs/search',dct)
@@ -99,6 +99,13 @@ class MLflowApiClient(object):
         rsp = requests.get(url)
         self._check_response(rsp)
         return rsp.text
+
+    def get_as_bytes(self, path):
+        url = self._mk_url(path)
+        if self.verbose: print("api_client.GET: url:",url)
+        rsp = requests.get(url)
+        self._check_response(rsp)
+        return rsp.content
 
     def post(self, path, dct):
         data = json.dumps(dct)
